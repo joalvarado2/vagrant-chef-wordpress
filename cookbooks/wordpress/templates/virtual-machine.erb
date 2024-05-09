@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+
+    # Configuración de los registros de errores y accesos
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    <Directory /var/www/html>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Reglas de bloqueo de acceso a wp-admin y wp-login.php
+    <FilesMatch "^(wp-admin|wp-login\.php)">
+        Require all denied
+    </FilesMatch>
+</VirtualHost>
